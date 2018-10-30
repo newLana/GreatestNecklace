@@ -12,11 +12,11 @@ namespace Necklaces
                 Console.Write(bead + " ");
             }
 
-            Console.WriteLine($"\nResult: {GetGreatrestNecklace(beads)}");
+            Console.WriteLine($"\nResult: {GetGreatestNecklace(beads)}");
             Console.ReadKey();
         }
 
-        static int GetGreatrestNecklace(int[] b)
+        static int GetGreatestNecklace(int[] b)
         {
             string necklaces = "!|";
             int count = 0;
