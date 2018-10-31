@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Necklaces
 {
@@ -11,25 +12,36 @@ namespace Necklaces
             {
                 Console.Write(bead + " ");
             }
-
-            Console.WriteLine($"\nResult: {GetGreatestNecklace(beads)}");
+            Console.WriteLine();
+            Console.WriteLine($"\nMax length: {GetGreatestNecklace(beads)}");
             Console.ReadKey();
         }
 
         static int GetGreatestNecklace(int[] b)
         {
-            string necklaces = "!|";
+            LinkedList<int> beads = new LinkedList<int>();
+            LinkedListNode<int> node;
             int count = 0;
             for (int i = 0; i < b.Length; i++)
             {
                 int current = i;
-                while (!necklaces.Contains("|" + current + "|"))
-                {
-                    necklaces += current + "|";
-                    current = b[current];
+                int localCount = 0;
+                if (!beads.Contains(current))
+                {                
+                    while (!beads.Contains(current))
+                    {
+                        node = beads.AddLast(current);
+                        current = b[current];
+                        localCount++;
+                    }
+                    node = beads.AddLast(current);
+                    count = Math.Max(count, localCount);
                 }
-                count = Math.Max(count, necklaces.Substring(necklaces.LastIndexOf("!") + 1).Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).Length);
-                necklaces += "!|"; 
+            }
+            Console.WriteLine("Result necklace");
+            foreach (var item in beads)
+            {
+                Console.Write(item + " ");
             }
             return count;
         }
