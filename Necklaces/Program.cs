@@ -20,7 +20,6 @@ namespace Necklaces
         static int GetGreatestNecklace(int[] b)
         {
             LinkedList<int> beads = new LinkedList<int>();
-            LinkedListNode<int> node;
             int count = 0;
             for (int i = 0; i < b.Length; i++)
             {
@@ -30,11 +29,11 @@ namespace Necklaces
                 {                
                     while (!beads.Contains(current))
                     {
-                        node = beads.AddLast(current);
+                        beads.AddLast(current);
                         current = b[current];
                         localCount++;
                     }
-                    node = beads.AddLast(current);
+                    beads.AddLast(current);
                     count = Math.Max(count, localCount);
                 }
             }
